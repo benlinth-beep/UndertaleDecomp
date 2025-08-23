@@ -33,6 +33,9 @@ EXIT /B 0
 :assetimport
 	set /P "datafilepath=Enter direct path of data.win: "
 
+	rem Remove double-quotes in file path (drag and drop adds them)
+	set datafilepath=%datafilepath:"=%
+
 	cd UTMT_CLI_Windows
 	UndertaleModCli.exe load "%datafilepath%" -s "../asset_importer/UndertaleDecompAssetImport.csx"
 	pause
