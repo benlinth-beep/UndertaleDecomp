@@ -1,5 +1,7 @@
 @echo off
 
+rem Set the current directory to the executing folder; if drag and drop happens the current directory is set wrong
+cd /d %~dp0
 cd utils
 
 :: fun fact this was supposed to have a checksum check just like the .sh but fuck batch i could not get it to work well at all n i dont wanna bother with powershell
@@ -31,11 +33,15 @@ EXIT /B 0
 EXIT /B 0
 
 :assetimport
-	set /P "datafilepath=Enter direct path of data.win: "
-
+	rem attempt to add value from drag and drop 
+	set datafilepath="%1"
+	rem trim quotes if it is set 
+	set datafilepath=%datafilepath:"=%
+	rem if data.win was not drag and dropped, then prompt the user for it
+	if "%datafilepath%"=="" set /P "datafilepath=Enter direct path of data.win: "
+	echo %datafilepath%
 	rem Remove double-quotes in file path (drag and drop adds them)
 	set datafilepath=%datafilepath:"=%
-
 	cd UTMT_CLI_Windows
 	UndertaleModCli.exe load "%datafilepath%" -s "../asset_importer/UndertaleDecompAssetImport.csx"
 	pause
