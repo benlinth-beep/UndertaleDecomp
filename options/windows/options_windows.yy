@@ -1,5 +1,5 @@
 {
-  "$GMWindowsOptions":"",
+  "$GMWindowsOptions":"v1",
   "%Name":"Windows",
   "name":"Windows",
   "option_windows_allow_fullscreen_switching":false,
@@ -7,6 +7,7 @@
   "option_windows_company_info":"Original game by Toby Fox, Decomp by Vultu and Daniela",
   "option_windows_copyright_info":"",
   "option_windows_copy_exe_to_dest":false,
+  "option_windows_d3dswapeffectdiscard":false,
   "option_windows_description_info":"Decompilation of the UNDERTALE Switch port, ported to the latest Gamemaker Studio 2",
   "option_windows_disable_sandbox":false,
   "option_windows_display_cursor":true,
