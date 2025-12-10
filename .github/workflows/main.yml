@@ -1,0 +1,48 @@
+name: GameMaker Web Export
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  build_and_deploy:
+    runs-on: windows-latest # GMS2 requires Windows to build
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up GameMaker Studio 2 Environment
+      # This step requires a custom action or manual installation if not using a pre-configured runner.
+      # You would need to install GMS2 and any necessary SDKs (e.g., HTML5 SDK).
+      # This can be complex and may require a self-hosted runner with GMS2 pre-installed.
+      run: |
+        # Example: Install GMS2 or configure existing installation
+        # This part is highly dependent on your GMS2 setup and runner environment.
+        echo "Please ensure GameMaker Studio 2 is installed and configured on the runner."
+
+    - name: Build GameMaker Project (HTML5)
+      # Use GameMaker's command-line interface (CLI) or Igor to build the project.
+      # Replace 'YourGame.yyp' with your actual project file name.
+      # You'll need to specify the correct path to Igor or the GMS2 CLI.
+      run: |
+        "C:\Program Files\GameMaker Studio 2\GameMakerStudio.exe" /project "nxtale.yyp" /target HTML5 /output "build/web"
+
+    - name: Upload HTML5 Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: web-export
+        path: build/web/ # Path to your exported HTML5 files
+
+    - name: Deploy to Hosting (Optional)
+      # Add steps here to deploy your web export to a hosting service (e.g., itch.io, GitHub Pages).
+      # This could involve using a specific action for the platform or a custom script.
+      # Example for itch.io:
+      # uses: josephbmanley/butler-itchio-action@v1.2.0
+      # with:
+      #   butler_api_key: ${{ secrets.BUTLER_API_KEY }}
+      #   game_path: build/web
+      #   itch_username: your_itch_username
+      #   itch_game_name: your_itch_game_name
